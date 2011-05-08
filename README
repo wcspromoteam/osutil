@@ -1,0 +1,19 @@
+PACKAGE
+
+package osutil
+import "github.com/wcspromoteam/osutil"
+
+Utility functions for functionality you would expect to find in the os package, such as running programs and testing if files exist.
+
+
+FUNCTIONS
+
+func FileExists(name string) bool
+Checks if a file exists, returns true if the file exists and can be opened, false otherwise. If the file exists but cannot be opened, it still returns false.
+NOTE: Assumes that any error opening the file for reading means that the file does not exist. This is not always true, but is probably the best behaviour anyway. There is rarely a usage case where you want to check if a file exists, but not if you can open it.
+
+func Run(command string, args []string) (proc *exec.Cmd, err os.Error)
+Simple way to run most programs. Searches for the program in PATH, and runs the first found program. Args need not contain the program name as the zeroth argument, it is prepended automatically.
+
+func WaitRun(command string, args []string) (proc *exec.Cmd, err os.Error)
+Runs a command using Run(), but waits for it to complete before returning.
